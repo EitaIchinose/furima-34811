@@ -52,9 +52,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'パスワードは、確認用を含めて2回入力すること' do
-      @user.password_confirmation = nil
+      @user.password_confirmation = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation can't be blank")
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password confirmation is invalid")
     end
 
     it 'パスワードとパスワード（確認用）は、値の一致が必須であること' do
