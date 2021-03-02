@@ -34,37 +34,37 @@ RSpec.describe Product, type: :model do
       it 'カテゴリーの情報が空の場合、出品できない' do
         @product.category_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category can't be blank", 'Category is not a number')
+        expect(@product.errors.full_messages).to include("Category can't be blank", "Category Select")
       end
 
       it '商品の状態についての情報が空の場合、出品できない' do
         @product.status_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Status can't be blank", 'Status is not a number')
+        expect(@product.errors.full_messages).to include("Status can't be blank", "Status Select")
       end
 
       it '販売価格についての情報が空の場合、出品できない' do
         @product.price = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price can't be blank", 'Price is invalid')
+        expect(@product.errors.full_messages).to include("Price can't be blank", "Price Half-width number", "Price Out of setting range")
       end
 
       it '販売価格は、全角で記入されていた場合、出品できない' do
         @product.price = '３００'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price is invalid')
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
       end
 
       it '販売価格が¥299以下の場合、出品できない' do
         @product.price = '299'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price is invalid')
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
       end
 
       it '販売価格が¥10000000以上の場合、出品できない' do
         @product.price = '10000000'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price is invalid')
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
       end
     end
   end
@@ -80,19 +80,19 @@ RSpec.describe Product, type: :model do
       it '配送料の負担の情報が空の場合、出品できない' do
         @product.shipping_cost_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping cost can't be blank", 'Shipping cost is not a number')
+        expect(@product.errors.full_messages).to include("Shipping cost can't be blank", "Shipping cost Select")
       end
 
       it '発送元の地域の情報が空の場合、出品できない' do
         @product.shipping_area_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping area can't be blank", 'Shipping area is not a number')
+        expect(@product.errors.full_messages).to include("Shipping area can't be blank", "Shipping area Select")
       end
 
       it '発送までの日数の情報が空の場合、出品できない' do
         @product.shipping_days_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping days can't be blank", 'Shipping days is not a number')
+        expect(@product.errors.full_messages).to include("Shipping days can't be blank", "Shipping days Select")
       end
     end
   end
