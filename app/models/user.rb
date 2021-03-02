@@ -18,4 +18,5 @@ class User < ApplicationRecord
   end
     validates :password, :password_confirmation, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/ }
 
+    has_many :products
 end
