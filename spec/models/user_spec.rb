@@ -60,7 +60,8 @@ RSpec.describe User, type: :model do
       it 'パスワードは、確認用を含めて2回入力すること' do
         @user.password_confirmation = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password confirmation is invalid")
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password",
+                                                      'Password confirmation is invalid')
       end
 
       it 'パスワードとパスワード（確認用）は、値の一致が必須であること' do
@@ -74,21 +75,21 @@ RSpec.describe User, type: :model do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
       end
 
       it 'パスワードは、英語のみでは登録できない' do
         @user.password = 'abcefg'
         @user.password_confirmation = 'abcefg'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
       end
 
       it 'パスワードは、全角では登録できない' do
         @user.password = 'ＡＢＣ１２３'
         @user.password_confirmation = 'ＡＢＣ１２３'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
       end
     end
   end
