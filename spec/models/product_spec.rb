@@ -56,15 +56,39 @@ RSpec.describe Product, type: :model do
       end
 
       it '販売価格が¥299以下の場合、出品できない' do
-        @product.price = '299'
+        @product.price = 299
         @product.valid?
         expect(@product.errors.full_messages).to include("Price Out of setting range")
       end
 
       it '販売価格が¥10000000以上の場合、出品できない' do
-        @product.price = '10000000'
+        @product.price = 10000000
         @product.valid?
         expect(@product.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it '販売価格は半角英数混合にて入力した場合、出品できない' do
+        @product.price = '123abc'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it '販売価格は半角英語にて入力した場合、出品できない' do
+        @product.price = 'abcd'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it '商品の状態が１の場合、出品できない' do
+        @product.status_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Status Select")
+      end
+
+      it 'カテゴリーが１の場合、出品できない' do
+        @product.category_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Category Select")
       end
     end
   end
@@ -93,6 +117,24 @@ RSpec.describe Product, type: :model do
         @product.shipping_days_id = nil
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping days can't be blank", "Shipping days Select")
+      end
+
+      it '発送料の負担が１の場合、出品できない' do
+        @product.shipping_cost_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Shipping cost Select")
+      end
+
+      it '発送元の地域が１の場合、出品できない' do
+        @product.shipping_area_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Shipping area Select")
+      end
+
+      it '発送までの日数が１の場合、出品できない' do
+        @product.shipping_days_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Shipping days Select")
       end
     end
   end
