@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, expect: [:index, :show, :destroy]
+  before_action :authenticate_user!, except: [:index, :show, :destroy]
   before_action :move_to_index, only: :edit
 
   def index
