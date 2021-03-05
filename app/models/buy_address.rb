@@ -10,7 +10,7 @@ class BuyAddress
     validates :house_number
     validates :phone_number, format: {with: /\A[0-9]{,11}\z/}
   end
-  validates :prefectures_id, numericality: {other_than: 1, message: "can't be blank"}
+  validates :prefectures_id, numericality: {other_than: 1, message: "Select"}
 
   def save
     buy = Buy.create(user_id: user_id, product_id: product_id)
