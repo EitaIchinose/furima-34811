@@ -71,7 +71,7 @@ RSpec.describe BuyAddress, type: :model do
       end
 
       it '電話番号が12桁以上の場合、購入できない' do
-        @buy_address.phone_number = 123_456_789_123
+        @buy_address.phone_number = '123456789123'
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include('Phone number is invalid')
       end
