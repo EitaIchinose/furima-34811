@@ -1,6 +1,6 @@
 class BuyAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :product_id, :postal_code, :municipality, :house_number, :phone_number, :building, :prefectures_id
+  attr_accessor :user_id, :product_id, :postal_code, :municipality, :house_number, :phone_number, :building, :prefectures_id, :token
 
   with_options presence: true do
     validates :user_id
@@ -9,6 +9,7 @@ class BuyAddress
     validates :municipality
     validates :house_number
     validates :phone_number, format: {with: /\A[0-9]{,11}\z/}
+    validates :token
   end
   validates :prefectures_id, numericality: {other_than: 1, message: "Select"}
 
