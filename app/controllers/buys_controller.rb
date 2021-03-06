@@ -1,5 +1,7 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!, only: :index
   before_action :set_product, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @buy_address = BuyAddress.new
@@ -24,6 +26,10 @@ class BuysController < ApplicationController
 
   def set_product
     @product = Product.find(params[:product_id])
+  end
+
+  def move_to_index
+    redirect_to products_path unless @product.buy.blank? && @product.user_id != current_user.id
   end
 
   def pay_product
