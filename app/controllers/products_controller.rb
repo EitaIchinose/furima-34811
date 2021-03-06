@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
-
   def index
     @products = Product.all.order('created_at DESC')
   end
@@ -22,6 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @buy = Buy.new
   end
 
   def edit
@@ -48,11 +48,10 @@ class ProductsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to action: :index unless @product.user_id == current_user.id
+    redirect_to action: :index if @product.user_id == current_user.id || @product.buy.present?
   end
 
   def set_product
     @product = Product.find(params[:id])
   end
-
 end
