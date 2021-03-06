@@ -31,7 +31,7 @@ class BuysController < ApplicationController
   end
 
   def move_to_index
-    redirect_to products_path unless @product.buy.blank? && @product.user_id != current_user.id
+    redirect_to products_path if @product.user_id == current_user.id || @product.buy.blank?  
   end
 
   def pay_product
