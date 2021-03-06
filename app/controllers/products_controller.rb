@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
-
   def index
     @products = Product.all.order('created_at DESC')
   end
@@ -55,5 +54,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
 end
