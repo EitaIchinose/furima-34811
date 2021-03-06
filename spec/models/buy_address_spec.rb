@@ -13,6 +13,11 @@ RSpec.describe BuyAddress, type: :model do
       it "郵便番号、都道府県、市区町村、番地、電話番号、tokenの情報が存在すれば購入できる" do
         expect(@buy_address).to be_valid
       end
+
+      it "建物名が空の場合でも購入できる" do
+        @buy_address.building = nil
+        expect(@buy_address).to be_valid
+      end
     end
 
     context '購入が出来ない場合' do
@@ -27,6 +32,13 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid. Include hyphen(-)")
       end
+
+      it "郵便番号が全角の場合、購入できない" do
+        @buy_address.postal_code = '１２３-４５６７'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+      end
+
 
       it "都道府県が1の場合、購入できない" do
         @buy_address.prefectures_id = 1
@@ -73,7 +85,6 @@ RSpec.describe BuyAddress, type: :model do
       it "tokenが空の場合、購入できない" do
         @buy_address.token = nil
         @buy_address.valid?
-        binding.pry
         expect(@buy_address.errors.full_messages).to include("Token can't be blank")
       end
     end
