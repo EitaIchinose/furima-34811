@@ -82,10 +82,28 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include('Phone number is invalid')
       end
 
+      it '電話番号が英数混合の場合、購入できない' do
+        @buy_address.phone_number = '123456789abc'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
       it 'tokenが空の場合、購入できない' do
         @buy_address.token = nil
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'user_idが空の場合、購入できない' do
+        @buy_address.user_id = nil
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'product_idが空の場合、購入できない' do
+        @buy_address.product_id = nil
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Product can't be blank")
       end
     end
   end
