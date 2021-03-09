@@ -10,7 +10,7 @@ class BuyAddress
     validates :municipality
     validates :house_number
     validates :phone_number, format: { with: /\A[0-9]{,11}\z/ }
-    validates :token, presence: {message: '情報を入力してください'}
+    validates :token, presence: { message: '情報を入力してください' }
   end
   validates :prefectures_id, numericality: { other_than: 1, message: 'を選択してください' }
 
