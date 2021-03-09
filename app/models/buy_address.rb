@@ -6,13 +6,13 @@ class BuyAddress
   with_options presence: true do
     validates :user_id
     validates :product_id
-    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'にハイフン(-)を入れてください' }
     validates :municipality
     validates :house_number
     validates :phone_number, format: { with: /\A[0-9]{,11}\z/ }
-    validates :token
+    validates :token, presence: { message: '情報を入力してください' }
   end
-  validates :prefectures_id, numericality: { other_than: 1, message: 'Select' }
+  validates :prefectures_id, numericality: { other_than: 1, message: 'を選択してください' }
 
   def save
     buy = Buy.create(user_id: user_id, product_id: product_id)
