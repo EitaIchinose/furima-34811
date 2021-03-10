@@ -19,6 +19,11 @@ crumb :product_show do |product|
 end
 
 crumb :product_buy do |product|
-  link "購入画面", product_buys_path
+  link "商品購入画面", product_buys_path
+  parent :product_show, product
+end
+
+crumb :product_edit do |product|
+  link "商品編集画面", edit_product_path(product.id)
   parent :product_show, product
 end
