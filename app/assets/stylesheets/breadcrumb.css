@@ -1,0 +1,18 @@
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb a:active { 
+  color:red;
+  text-decoration:underline;
+}
+
+.breadcrumb {
+  font-weight: bold;
+  font-family: FontAwesome;
+  padding: 0 1em;
+}
+
+.breadcrumb a {
+  color: #888;
+}
